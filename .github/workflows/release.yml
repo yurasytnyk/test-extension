@@ -14,12 +14,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
         with:
-          node-version-file: package.json
-          cache: pnpm
-      - run: corepack enable
-      - run: pnpm install --frozen-lockfile
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          run_install: true
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
       - name: Build
         run: pnpm run build
