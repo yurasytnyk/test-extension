@@ -61,8 +61,8 @@ jobs:
           npx web-ext@8 sign --channel listed
         working-directory: artifact
         env:
-          WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
-          WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
 
   # Chrome:
   #   if: needs.Version.outputs.created
