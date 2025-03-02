@@ -76,22 +76,22 @@ jobs:
           WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
           WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
 
-  Chrome:
-    if: needs.Version.outputs.created
-    needs: Version
-    name: Submit (Chrome)
-    environment: Chrome
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-      - name: Upload build for Chrome
-        run: |
-          mv "$DIRECTORY/chrome-mv3-prod" artifact
-          npx chrome-webstore-upload-cli@3
-        working-directory: artifact
-        env:
-          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+  # Chrome:
+  #   if: needs.Version.outputs.created
+  #   needs: Version
+  #   name: Submit (Chrome)
+  #   environment: Chrome
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/download-artifact@v4
+  #     - name: Upload build for Chrome
+  #       run: |
+  #         mv "$DIRECTORY/chrome-mv3-prod" artifact
+  #         npx chrome-webstore-upload-cli@3
+  #       working-directory: artifact
+  #       env:
+  #         EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+  #         CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  #         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+  #         REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
