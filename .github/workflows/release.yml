@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       Version:
-        description: "Semantic version (e.g., v1.2.3) for updating manifest files."
+        description: 'Example: v1.2.3'
         required: true
 
 jobs:
@@ -48,11 +48,16 @@ jobs:
       - name: Build the extension
         run: pnpm build
 
-      - name: Update chrome manifest.json with version ${{ github.event.inputs.Version }}
-        run: npx dot-json@1 "$DIRECTORY/chrome-mv3-prod/manifest.json" version "${{ github.event.inputs.Version }}"
+      - name: Create tag if necessary
+        uses: fregante/daily-version-action@v2
 
-      - name: Update firefox manifest.json with version ${{ github.event.inputs.Version }}
-        run: npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" version "${{ github.event.inputs.Version }}"
+      - name: Update chrome manifest.json with version ${{ env.DAILY_VERSION }}
+        if: env.DAILY_VERSION_CREATED
+        run: npx dot-json@1 "$DIRECTORY/chrome-mv3-prod/manifest.json" version "$DAILY_VERSION"
+
+      - name: Update firefox manifest.json with version ${{ env.DAILY_VERSION }}
+        if: env.DAILY_VERSION_CREATED
+        run: npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" version "$DAILY_VERSION"
 
       - name: Ready for "submit" jobs
         if: env.DAILY_VERSION_CREATED
