@@ -68,7 +68,7 @@
     "default_locale": "en",
     "browser_specific_settings": {
       "gecko": {
-        "id": "{$PLASMO_PUBLIC_WEB_EXT_GECKO_ID}",
+        "id": "{b2e35c88-79a0-4f9c-9213-8f4c7d60b47d}",
         "strict_min_version": "126.0"
       }
     },
