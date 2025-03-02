@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       Version:
-        description: 'Example: v1.2.3'
+        description: "Example: v1.2.3"
         required: true
 
 jobs:
@@ -48,33 +48,28 @@ jobs:
       - name: Build the extension
         run: pnpm build
 
-      - name: Create tag if necessary
-        uses: fregante/daily-version-action@v2
+      - name: Update chrome manifest.json with version ${{ github.event.inputs.Version }}
+        run: npx dot-json@1 "$DIRECTORY/chrome-mv3-prod/manifest.json" version "${{ github.event.inputs.Version }}"
 
-      - name: Update chrome manifest.json with version ${{ env.DAILY_VERSION }}
-        if: env.DAILY_VERSION_CREATED
-        run: npx dot-json@1 "$DIRECTORY/chrome-mv3-prod/manifest.json" version "$DAILY_VERSION"
-
-      - name: Update firefox manifest.json with version ${{ env.DAILY_VERSION }}
-        if: env.DAILY_VERSION_CREATED
-        run: npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" version "$DAILY_VERSION"
+      - name: Update firefox manifest.json with version ${{ github.event.inputs.Version }}
+        run: npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" version "${{ github.event.inputs.Version }}"
 
       - name: Ready for "submit" jobs
-        if: env.DAILY_VERSION_CREATED
+        if: github.event.inputs.Version
         uses: actions/upload-artifact@v4
         with:
           path: ${{ env.DIRECTORY }}
 
       - name: Create release
-        if: env.DAILY_VERSION_CREATED
+        if: github.event.inputs.Version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: ${{ env.DIRECTORY }}
         run: |
-          FILENAME="$PROJECT_NAME-$DAILY_VERSION-for-local-testing-only.zip"
+          FILENAME="$PROJECT_NAME-${{ github.event.inputs.Version }}-for-local-testing-only.zip"
           zip -r "$FILENAME" ./*
           # Create as draft to curate it before sending it out
-          gh release create "$DAILY_VERSION" "$FILENAME" --draft --generate-notes
+          gh release create "${{ github.event.inputs.Version }}" "$FILENAME" --draft --generate-notes
 
   Firefox:
     if: needs.Version.outputs.created
