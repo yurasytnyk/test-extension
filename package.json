@@ -68,7 +68,7 @@
     "default_locale": "en",
     "browser_specific_settings": {
       "gecko": {
-        "id": "{b2e35c88-79a0-4f9c-9213-8f4c7d60b47d}",
+        "id": "$FIREFOX_EXT_ID",
         "strict_min_version": "126.0"
       }
     },
