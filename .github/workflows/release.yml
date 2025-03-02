@@ -55,7 +55,7 @@ jobs:
         run: npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" version "${{ github.event.inputs.Version }}"
 
       - name: Update firefox manifest.json gecko id
-        run: npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" gecko.id "${{ secrets.FIREFOX_EXT_ID }}"
+        run: npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" browser_specific_settings.gecko.id "${{ secrets.FIREFOX_EXT_ID }}"
 
       - name: Ready for "submit" jobs
         if: github.event.inputs.Version
