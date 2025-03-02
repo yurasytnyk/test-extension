@@ -48,14 +48,11 @@ jobs:
       - name: Build the extension
         run: pnpm build
 
-      - name: Update chrome manifest.json with version ${{ github.event.inputs.Version }}
-        run: npx dot-json@1 "$DIRECTORY/chrome-mv3-prod/manifest.json" version "${{ github.event.inputs.Version }}"
-
-      - name: Update firefox manifest.json with version ${{ github.event.inputs.Version }}
-        run: npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" version "${{ github.event.inputs.Version }}"
-
-      - name: Update firefox manifest.json gecko id
-        run: npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" browser_specific_settings.gecko.id "${{ secrets.FIREFOX_EXT_ID }}"
+      - name: Update chrome and firefox manifest.json with version and gecko id
+        run: |
+          npx dot-json@1 "$DIRECTORY/chrome-mv3-prod/manifest.json" version "${{ github.event.inputs.Version }}"
+          npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" version "${{ github.event.inputs.Version }}"
+          npx dot-json@1 "$DIRECTORY/firefox-mv3-prod/manifest.json" browser_specific_settings.gecko.id "${{ secrets.FIREFOX_EXT_ID }}"
 
       - name: Ready for "submit" jobs
         if: github.event.inputs.Version
