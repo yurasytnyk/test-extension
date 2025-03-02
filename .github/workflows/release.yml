@@ -69,7 +69,7 @@ jobs:
       - uses: actions/download-artifact@v4
       - name: Upload build for Firefox
         run: |
-          mv "$DIRECTORY/firefox-mv3-prod" artifact
+          mv "firefox-mv3-prod" artifact
           npx web-ext@8 sign --channel listed
         working-directory: artifact
         env:
