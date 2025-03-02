@@ -69,12 +69,12 @@ jobs:
       - uses: actions/download-artifact@v4
       - name: Upload build for Firefox
         run: |
-          mv "firefox-mv3-prod" artifact
-          npx web-ext@8 sign --channel listed
+          mv firefox-mv3-prod artifact
+          npx web-ext sign --channel=listed --amo-metadata=./amo-metadata.json --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET
         working-directory: artifact
         env:
-          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
-          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
 
   # Chrome:
   #   if: needs.Version.outputs.created
