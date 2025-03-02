@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       Version:
-        description: "Example: v1.2.3"
+        description: "Semantic version (e.g., v1.2.3) for updating manifest files."
         required: true
 
 jobs:
