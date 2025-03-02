@@ -70,7 +70,7 @@ jobs:
       - name: Upload build for Firefox
         run: |
           mv firefox-mv3-prod artifact
-          npx web-ext sign --channel=listed --amo-metadata=./amo-metadata.json --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET
+          pnpm dlx web-ext sign --channel=listed --amo-metadata=./amo-metadata.json --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET
         working-directory: artifact
         env:
           AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
