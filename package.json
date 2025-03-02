@@ -23,9 +23,6 @@
   "dependencies": {
     "@apollo/client": "^3.13.1",
     "@plasmohq/storage": "^1.15.0",
-    "@vayapin/cs-types-my": "^0.8.4",
-    "@vayapin/oauth-kit": "^2.1.0",
-    "@vayapin/oauth-kit-react": "^1.3.6",
     "clsx": "^2.1.1",
     "graphql": "^16.10.0",
     "i18next": "^24.2.2",
