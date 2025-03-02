@@ -49,6 +49,8 @@ jobs:
 
       - name: Create release
         if: env.DAILY_VERSION_CREATED
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: ${{ env.DIRECTORY }}
         run: |
           FILENAME="$PROJECT_NAME-$DAILY_VERSION-for-local-testing-only.zip"
