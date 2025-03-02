@@ -1,6 +1,6 @@
 env:
   DIRECTORY: build
-  PROJECT_NAME: VayaPin
+  PROJECT_NAME: Yurii Sytnyk
 
 name: Release
 
@@ -12,6 +12,8 @@ jobs:
     outputs:
       created: ${{ env.DAILY_VERSION_CREATED }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Cache pnpm modules
@@ -79,7 +81,7 @@ jobs:
 
       - name: Upload build for Firefox
         run: |
-          pnpm dlx web-ext sign --channel=listed --amo-metadata=../../amo-metadata.json --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET
+          pnpm dlx web-ext sign --channel=listed --amo-metadata=../../amo-metadata.json --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET --approval-timeout=0
         working-directory: artifact/firefox-mv3-prod
         env:
           AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}

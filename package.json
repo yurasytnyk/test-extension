@@ -1,10 +1,10 @@
 {
   "private": true,
-  "name": "vaya-pin",
-  "displayName": "Vaya pin",
+  "name": "yurii-sytnyk",
+  "displayName": "Yurii Sytnyk",
   "version": "0.0.0",
-  "description": "An address for Anyone & Anything, Anywhere.",
-  "author": "VayaPin",
+  "description": "Yurii Sytnyk",
+  "author": "Yurii Sytnyk",
   "type": "module",
   "scripts": {
     "dev": "plasmo dev",

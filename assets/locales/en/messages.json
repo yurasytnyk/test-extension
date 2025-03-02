@@ -1,33 +1,8 @@
 {
   "extensionName": {
-    "message": "VayaPin"
+    "message": "Yurii Sytnyk"
   },
   "extensionDescription": {
-    "message": "VayaPin - Smart Location Sharing & Autofill Extension"
-  },
-  "floatingButton": {
-    "message": "Autofill",
-    "label": "autofill with VayaPin",
-    "closeLabel": "hide VayaPin autofill"
-  },
-  "pluginActivity": {
-    "message": "Plugin is {{status}}",
-    "enabled": "enabled",
-    "disabled": "disabled"
-  },
-  "feedback": {
-    "message": "Feedback",
-    "label": "Feedback:",
-    "ariaLabel": "Feedback status",
-    "smile": "Smile",
-    "frown": "Frown",
-    "meh": "Meh"
-  },
-  "history": {
-    "message": "show history"
-  },
-  "search": {
-    "message": "Search",
-    "btnText": "Add"
+    "message": "Yurii Sytnyk"
   }
 }
