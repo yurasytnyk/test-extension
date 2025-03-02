@@ -14,7 +14,7 @@ on:
 jobs:
   Version:
     outputs:
-      created: ${{ env.DAILY_VERSION_CREATED }}
+      created: ${{ github.event.inputs.Version }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
